@@ -1,11 +1,18 @@
 import swaggerAutogen from 'swagger-autogen';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const doc = {
     info: {
         title: 'Financial Management API',
         description: 'API for managing finances, transactions, and dashboards.'
     },
-    host: 'localhost:3000',
+    host: isProduction 
+        ? 'finance-tracker-api-xd7k.onrender.com'
+        : 'localhost:3000',                       
+    schemes: isProduction ? ['https'] : ['http'],
     securityDefinitions: {
         bearerAuth: {
             type: 'apiKey',
@@ -17,7 +24,6 @@ const doc = {
 };
 
 const outputFile = './swagger-output.json';
-
 
 const routes = [
     './routes/auth.routes.js',
