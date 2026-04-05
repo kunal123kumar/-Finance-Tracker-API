@@ -11,8 +11,8 @@ transactionRoutes.use(authMiddleware);
 transactionRoutes .get("/", authorize("viewer", "analyst", "admin"), getTransactions);
 transactionRoutes .get("/:id", authorize("viewer", "analyst", "admin"), getTransactionsById);
 
-transactionRoutes.post("/", authorize("admin"), transactionRules, validate, createTransaction);
-transactionRoutes.put("/:id", authorize("admin"), transactionRules, validate, updateTransaction);
-transactionRoutes.delete("/:id", authorize("admin"), deleteTransaction);
+transactionRoutes.post("/", authorize("admin","Admin"), transactionRules, validate, createTransaction);
+transactionRoutes.put("/:id", authorize("admin","Admin"), transactionRules, validate, updateTransaction);
+transactionRoutes.delete("/:id", authorize("admin","Admin"), deleteTransaction);
 
 export default transactionRoutes;
