@@ -2,6 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger-output.json'with { type: 'json' };
+
+
 import authRoutes from './routes/auth.routes.js';
 import transactionRoutes from './routes/transactions.routes.js';
 import dashboardRouter from './routes/dashboard.route.js';
@@ -14,7 +18,11 @@ connectDB();
 dotenv.config();
 
 const app = express();
+
+
 app.use(express.json());
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
